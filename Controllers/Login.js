@@ -2,13 +2,12 @@ import { userModel } from "../database/schema/schema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import { token } from "../utils/auth.js";
 
-dotenv.config()
 export const Login = async (req, res) => {
   //variable declaration
   const { userName, userPassword } = req.body;
   var valid;
-  const secretKey = process.env.secretKey;
   try {
     //user validation
     const isValidUser = await userModel.findOne({ userName: userName });
@@ -23,17 +22,14 @@ export const Login = async (req, res) => {
       if (!(await valid)) {
         res.status(401).send({ message: "Invalid password" });
       } else {
-        const token = jwt.sign(
-          { userName: userName, userPassword: userPassword },
-          secretKey,
-          { expiresIn: "10h" }
-        );
-        res
-          .status(200)
-          .send({ status: 200, message: "login success", token: token });
+        res.status(200).send({
+          status: 200,
+          message: "login success",
+          token: await token({ userName, userPassword }),
+        });
       }
     }
   } catch (error) {
-    res.send({ status: 500, message: error });
+    res.send({ status: 500, message: JSON.stringify(error) });
   }
 };

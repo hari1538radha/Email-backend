@@ -26,6 +26,6 @@ export const Signup = async (req, res) => {
       return res.status(403).json("message:User already exist");
     }
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).sned(JSON.stringify(error));
   }
 };

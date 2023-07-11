@@ -1,8 +1,9 @@
 import express from "express";
-import {Login} from "../Controllers/Login.js";
-import { Signup } from "../Controllers/Signup.js";
-const userRoute = express.Router();
-userRoute.post("/login", Login);
-userRoute.post("/signup", Signup);
+import userRoute from "./userRoute.js";
+import protectedRoute from "./userAuth.js";
 
-export default userRoute;
+const mainRoute = express.Router();
+mainRoute.use("/user", userRoute);
+mainRoute.use("/auth", protectedRoute);
+
+export default mainRoute;
