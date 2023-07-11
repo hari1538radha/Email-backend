@@ -36,7 +36,7 @@ export const jwtAuth = async (req, res, next) => {
         }
         console.log(response);
 
-        if (response.userName == userName) {
+        if (response.userName == "hari1538") {
           //   res.send(JSON.stringify(response));
           return next();
         } else {

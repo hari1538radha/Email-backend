@@ -17,7 +17,6 @@ const port = process.env.PORT;
 
 app.use("/api", userRoute);
 app.use("/api/private",protectedRoute);
-
 //Mongoose connection
 mongoose
   .connect(MongoUrl, {
