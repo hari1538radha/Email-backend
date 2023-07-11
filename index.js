@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import Route from "./Routes/Routes.js";
+import userRoute from "./Routes/Routes.js";
 import { MongoUrl } from "./database/database.js";
 import mongoose from "mongoose";
 
@@ -10,10 +10,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json())
 //ENV
 const port = process.env.PORT;
 
-app.use("/api", Route);
+app.use("/api", userRoute);
 
 //Mongoose connection
 mongoose

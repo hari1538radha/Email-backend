@@ -1,27 +1,39 @@
 import { userModel } from "../database/schema/schema.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
 
+dotenv.config()
 export const Login = async (req, res) => {
-  const { UserName, Password } = req.body;
-  console.log(req.body);
-  const user = await userModel.find({ UserName: UserName });
-  const userdata = new userModel(req.body);
-    const salt = await bcrypt.genSalt(10);
-  userdata.Password = await bcrypt.hash(userdata.Password, salt);
-  if (user) {
-    // userdata
-    //   .save()
-    //   .then((data) => {
-    //     res.write(data);
-    //   })
-    //   .catch((err) => {
-    //     res.write(JSON.stringify(err));
-    //   });
+  //variable declaration
+  const { userName, userPassword } = req.body;
+  var valid;
+  const secretKey = process.env.secretKey;
+  try {
+    //user validation
+    const isValidUser = await userModel.findOne({ userName: userName });
+    console.log(isValidUser);
+    //password validation
+    valid = await bcrypt.compare(userPassword, isValidUser.userPassword);
+    console.log(await valid);
 
-    console.log(user);
-    res.status(200).send(user);
-   
-  } else {
-    res.send("no user found");
+    if (!isValidUser) {
+      return res.status(422).send({ message: "Invalid username or password" });
+    } else {
+      if (!(await valid)) {
+        res.status(401).send({ message: "Invalid password" });
+      } else {
+        const token = jwt.sign(
+          { userName: userName, userPassword: userPassword },
+          secretKey,
+          { expiresIn: "10h" }
+        );
+        res
+          .status(200)
+          .send({ status: 200, message: "login success", token: token });
+      }
+    }
+  } catch (error) {
+    res.send({ status: 500, message: error });
   }
 };
