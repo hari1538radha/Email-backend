@@ -20,6 +20,7 @@ export const updateProduct = async (req, res, next) => {
               weight: body.weight,
               dimensions: body.dimensions,
               inStock: body.inStock,
+              updatedAt: Date.now,
             },
           },
           { upsert: true },

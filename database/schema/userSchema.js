@@ -10,19 +10,15 @@ export const UserSchema = new moongose.Schema({
     type: String,
   },
 
-  products: [
-    {
-      product_id: {
-        type: Schema.Types.ObjectId,
-        ref: "product",
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
+  product_id: [{
+    type: moongose.Schema.Types.ObjectId,
+    ref: "product",
+    required: true,
+  }],
+  quantity: {
+    type: Number,
+    required: true,
+  },
 
   contact_Number: { type: Number },
 });

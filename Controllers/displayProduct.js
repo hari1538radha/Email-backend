@@ -14,7 +14,7 @@ export const findProduct = (req, res, next) => {
 export const findProductBy_ID = (req, res, next) => {
   productModel
     .findOne({ _id: req.query._id })
-    .populate("purchasedUser")
+    .populate("products.user_id")
     .then((response) => {
       if (!response) {
         return res.send("product not found");

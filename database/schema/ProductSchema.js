@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Mongoose, Schema } from "mongoose";
 
 export const productSchema = new mongoose.Schema(
   {
@@ -43,7 +43,7 @@ export const productSchema = new mongoose.Schema(
     purchasedUser: [
       {
         user_id: {
-          type: Schema.Types.ObjectId,
+          type: mongoose.Schema.Types.ObjectId,
           ref: "user_login",
           required: true,
         },
@@ -52,6 +52,10 @@ export const productSchema = new mongoose.Schema(
     ],
 
     createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updateAt: {
       type: Date,
       default: Date.now,
     },

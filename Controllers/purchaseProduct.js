@@ -13,6 +13,7 @@ export const updateProductPurchased = async (req, res, next) => {
       { _id: product_id },
       {
         $push: { purchasedUser: { ...users } },
+        updatedAt: Date.now,
       }
     )
     .then((response) => {
@@ -28,10 +29,12 @@ export const updateProductPurchased = async (req, res, next) => {
 };
 
 export const userUpdateCallback = async (user_id, product_id) => {
- 
-  const products = { product_id: product_id, quantity: 2 };
+  const quantity = 8000;
   await userModel
-    .updateOne({ _id: user_id }, { $push: { products: { ...products } } })
+    .updateOne(
+      { _id: user_id },
+      { $set: { product_id: product_id, quantity: quantity } }
+    )
     .then((result) => {
       console.log(JSON.stringify(result));
     });

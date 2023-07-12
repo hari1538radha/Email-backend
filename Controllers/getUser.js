@@ -2,8 +2,7 @@ import { userModel } from "../database/schema/userSchema.js";
 
 export const find_All_User = (req, res, next) => {
   userModel
-    .find()
-    .then((Response) => {
+    .find().populate("product_id").then((Response) => {
       res.send({
         message: "users found",
         users: Object.values(Response),
