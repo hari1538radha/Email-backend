@@ -15,10 +15,9 @@ export const token = ({ userName, userPassword }) => {
 export const jwtAuth = async (req, res, next) => {
   try {
     //const declaration
-    const { userName } = req.body;
+    const { userName } = req.query;
     const authTokenHeader = req.headers["authorization"];
     const token = authTokenHeader && authTokenHeader.split(" ")[1];
-
     if (token == null) {
       res.send({ status: 404, message: "token required to access this page" });
     } else {
@@ -34,13 +33,11 @@ export const jwtAuth = async (req, res, next) => {
             return res.send(JSON.stringify(err));
           }
         }
-        console.log(response);
-
-        if (response.userName == "hari1538") {
+        if (response.userName == userName) {
           //   res.send(JSON.stringify(response));
           return next();
         } else {
-          res.send("invalid Login");
+          res.send("invalid Login credentials");
         }
       });
     }

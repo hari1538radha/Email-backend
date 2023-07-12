@@ -11,7 +11,6 @@ export const findProduct = (req, res, next) => {
     });
 };
 
-
 export const findProductBy_ID = (req, res, next) => {
   productModel
     .findOne({ _id: req.query._id })
@@ -23,7 +22,8 @@ export const findProductBy_ID = (req, res, next) => {
       }
     })
     .catch((err) => {
-      res.send({ message: "error", err });
+      res.send({ message: "error", error:JSON.stringify(err) });
       res.end();
     });
 };
+

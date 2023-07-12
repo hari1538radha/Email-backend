@@ -4,7 +4,7 @@ export const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     description: {
       type: String,
@@ -13,10 +13,12 @@ export const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+      min:200
     },
     category: {
       type: String,
       required: true,
+
     },
     brand: {
       type: String,
@@ -43,6 +45,7 @@ export const productSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
+  { upsert: true },
   { timestamp: true }
 );
 export const productModel = new mongoose.model("product", productSchema);
