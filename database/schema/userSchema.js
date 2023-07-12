@@ -1,4 +1,4 @@
-import moongose from "mongoose";
+import moongose, { Schema } from "mongoose";
 
 export const UserSchema = new moongose.Schema({
   userName: {
@@ -9,7 +9,22 @@ export const UserSchema = new moongose.Schema({
     requires: true,
     type: String,
   },
-  contact_Number:{type:Number}
+
+  products: [
+    {
+      product_id: {
+        type: Schema.Types.ObjectId,
+        ref: "product",
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
+
+  contact_Number: { type: Number },
 });
 
-export const userModel = new moongose.model("user_login",UserSchema);
+export const userModel = new moongose.model("user_login", UserSchema);

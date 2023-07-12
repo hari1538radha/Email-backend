@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 export const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     description: {
       type: String,
@@ -13,12 +13,11 @@ export const productSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
-      min:200
+      min: 200,
     },
     category: {
       type: String,
       required: true,
-
     },
     brand: {
       type: String,
@@ -40,6 +39,18 @@ export const productSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+
+    purchasedUser: [
+      {
+        user_id: {
+          type: Schema.Types.ObjectId,
+          ref: "user_login",
+          required: true,
+        },
+        quantity: { type: Number, required: true },
+      },
+    ],
+
     createdAt: {
       type: Date,
       default: Date.now,

@@ -21,7 +21,7 @@ app.use("/api/private",protectedRoute);
 mongoose
   .connect(MongoUrl, {
     useNewUrlParser: true,
-    useUnifiedtopology: true,
+    useUnifiedtopology: true
   })
   .then(() => {
     console.log("MongoDB connected");

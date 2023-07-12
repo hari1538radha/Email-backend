@@ -16,3 +16,13 @@ export const deleteProduct = async (req, res, next) => {
     res.send({ error: error });
   }
 };
+
+export const deleteAllProducts = async (req, res, next) => {
+  try {
+    productModel.deleteMany().then((response) => {
+      res.send(response);
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
