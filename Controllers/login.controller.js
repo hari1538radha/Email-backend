@@ -1,7 +1,5 @@
 import { userModel } from "../database/mongodb.model/user.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import * as dotenv from "dotenv";
 import { token } from "../utils/jwt.auth.js";
 
 export const Login = async (req, res) => {

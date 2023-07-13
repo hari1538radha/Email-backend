@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import userRoute from "./Routes/user_router.router.js";
-import  protectedRoute from "./Routes/user_auth.router.js";
+import mainRoute from "./Routes/main_routes.js";
+import protectedRoute from "./Routes/user_auth.js";
+import userRoute from "./Routes/user_router.js";
 import { MongoUrl } from "./database/mongo_db.config.js";
 import mongoose from "mongoose";
 
@@ -14,14 +15,14 @@ app.use(bodyParser.json());
 app.use(express.json());
 //ENV
 const port = process.env.PORT;
-
-app.use("/api", userRoute);
-app.use("/api/private",protectedRoute);
+app.use("/api", mainRoute)
+app.use("/user",userRoute)
+app.use("/auth", protectedRoute);
 //Mongoose connection
 mongoose
   .connect(MongoUrl, {
     useNewUrlParser: true,
-    useUnifiedtopology: true
+    useUnifiedtopology: true,
   })
   .then(() => {
     console.log("MongoDB connected");
