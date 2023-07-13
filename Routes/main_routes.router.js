@@ -1,8 +1,8 @@
 import express from "express";
-import userRoute from "./userRoute.js";
-import protectedRoute from "./userAuth.js";
-import { find_All_User } from "../Controllers/getUser.js";
-import { findUserBy_ID } from "../Controllers/getUser.js";
+import userRoute from "./user_router.router.js";
+import protectedRoute from "./user_auth.router.js";
+import { find_All_User } from "../Controllers/display_users.controller.js";
+import { findUserBy_ID } from "../Controllers/display_users.controller.js";
 
 const mainRoute = express.Router();
 mainRoute.use("/user", userRoute);

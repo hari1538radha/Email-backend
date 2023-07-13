@@ -1,4 +1,4 @@
-import { userModel } from "../database/schema/userSchema.js";
+import { userModel } from "../database/mongodb.model/user.model.js";
 import bcrypt from "bcrypt";
 
 export const Signup = async (req, res) => {

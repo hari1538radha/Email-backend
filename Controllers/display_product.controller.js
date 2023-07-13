@@ -1,4 +1,4 @@
-import { productModel } from "../database/schema/ProductSchema.js";
+import { productModel } from "../database/mongodb.model/product.model.js";
 
 export const findProduct = (req, res, next) => {
   productModel

@@ -1,4 +1,4 @@
-import { productModel } from "../database/schema/ProductSchema.js";
+import { productModel } from "../database/mongodb.model/product.model.js";
 export const deleteProduct = async (req, res, next) => {
   try {
     const _id = req.query._id;

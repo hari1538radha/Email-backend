@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import userRoute from "./Routes/Routes.js";
-import  protectedRoute from "./Routes/Routes.js";
-import { MongoUrl } from "./database/database.js";
+import userRoute from "./Routes/user_router.router.js";
+import  protectedRoute from "./Routes/user_auth.router.js";
+import { MongoUrl } from "./database/mongo_db.config.js";
 import mongoose from "mongoose";
 
 const app = express();

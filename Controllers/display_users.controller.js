@@ -1,4 +1,4 @@
-import { userModel } from "../database/schema/userSchema.js";
+import { userModel } from "../database/mongodb.model/user.model.js";
 
 export const find_All_User = (req, res, next) => {
   userModel

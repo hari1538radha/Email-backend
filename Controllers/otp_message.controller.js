@@ -1,14 +1,19 @@
-import { userModel } from "../database/schema/userSchema.js";
-import { otpModel } from "../database/schema/otp.schema.js";
-
+//Model imports
+import { userModel } from "../database/mongodb.model/user.model.js";
+import { otpModel } from "../database/mongodb.model/otp.model.js";
+//import twilio
 import Twilio from "twilio";
 export const userOTPMessaging = async (req, res) => {
+
+  //env configuration
   const accountSid = process.env.TWILLIO_ACCOUNT_SID;
   const authToken = process.env.TWILLIO_AUTH_TOKEN;
   const phonenumber = process.env.TWILLIO_PHONENUMBER;
+
   const client = Twilio(accountSid, authToken);
 
   const { user_id, contact_Number } = req.query;
+  //otp generation
   const generateOTP = () => {
     const digits = "0123456789";
     let OTP = "";
@@ -19,6 +24,7 @@ export const userOTPMessaging = async (req, res) => {
   };
 
   const otp = generateOTP();
+  //sending otp
   await userModel
     .findOne({ _id: user_id })
     .then((response) => {

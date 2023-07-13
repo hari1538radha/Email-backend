@@ -1,16 +1,21 @@
-import { userModel } from "../database/schema/userSchema.js";
-import { otpModel } from "../database/schema/otp.schema.js";
+//model imports
+import { userModel } from "../database/mongodb.model/user.model.js";
+import { otpModel } from "../database/mongodb.model/otp.model.js";
+//import 3-partypackages
 import bcrypt from "bcrypt";
 
-export const changeUserPassword = async (req, res, next) => {
+export const changeUserPassword = async (req, res) => {
+  //query destructureing
   const { otp, user_id, new_password } = req.query;
-  // res.send(response)
-  const hashedPassword = await bcrypt.hash(new_password, 12);
+  //password hashing
+  const salt = await bcrypt.genSalt(12);
+  const hashedPassword = await bcrypt.hash(new_password, salt);
+  //otp validation
   const otpvalidation = async () => {
     await otpModel
       .findOne({ user_id: user_id })
-      // .populate("user_id")
       .then((response) => {
+        //validating otp
         response.otp_sent == otp
           ? userModel
               .updateOne(
@@ -32,11 +37,11 @@ export const changeUserPassword = async (req, res, next) => {
                 res.send(err);
               })
           : res.send({ message: "invalid otp" });
-        // response ? res.send("user found") : res.send("user not found");
       })
       .catch((err) => {
         res.send({ error: JSON.stringify(err) });
       });
   };
+  //function call
   otpvalidation();
 };

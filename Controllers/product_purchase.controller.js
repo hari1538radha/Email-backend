@@ -1,5 +1,5 @@
-import { productModel } from "../database/schema/ProductSchema.js";
-import { userModel } from "../database/schema/userSchema.js";
+import { productModel } from "../database/mongodb.model/product.model.js";
+import { userModel } from "../database/mongodb.model/user.model.js";
 
 export const updateProductPurchased = async (req, res, next) => {
   const product_id = req.query.product_id;
