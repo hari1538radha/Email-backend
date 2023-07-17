@@ -1,17 +1,16 @@
 import product_model from "../database/model/product.model.js";
-import seqalize from "../database/sql/sql.js";
+
 export const addProduct = async (req, res, next) => {
   const { _id, title, discription, price } = req.body;
 
   const product = await product_model
     .create({
-      _id: 12,
-      title: "mobtrtrbile",
-      discription: "absdb etgrthaejbiatlenr",
-      price: 58989545,
+      _id: _id,
+      title: title,
+      discription: discription,
+      price: price,
     })
     .then((response) => {
-      console.log(response);
       res.send({ message: "uploded", data: response });
     })
     .catch((err) => {
@@ -20,7 +19,7 @@ export const addProduct = async (req, res, next) => {
 };
 export const display_product = async (req, res, next) => {
   await product_model
-    .findAll()
+    .findAll({ attributes: ["price", "_id"] })
     .then((response) => {
       res.send(response);
     })
