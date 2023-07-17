@@ -32,7 +32,7 @@ mongoose
       .authenticate()
       .then((response) => {
         seqalize
-          .sync()
+          .sync({ force: true })
           .then((result) => {
             console.log("tabels are been created");
             app.listen(port, () => {

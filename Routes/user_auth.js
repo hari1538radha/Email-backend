@@ -12,6 +12,8 @@ import { display_actors } from "../Controllers/displayactor_sql_contoller.js";
 import { display_actorbyName } from "../Controllers/displayactor_sql_contoller.js";
 import { addProduct } from "../Controllers/addproducts_sql.controller.js";
 import { display_product } from "../Controllers/addproducts_sql.controller.js";
+import { delete_product } from "../Controllers/addproducts_sql.controller.js";
+import { delete_productById } from "../Controllers/addproducts_sql.controller.js";
 const protectedRoute = express.Router();
 
 protectedRoute.get("/addproducts", jwtAuth, display);
@@ -30,4 +32,6 @@ protectedRoute.get("/sql/actor_byname", jwtAuth, display_actorbyName);
 protectedRoute.get("/sql/actor_diplay", jwtAuth, display_actors);
 protectedRoute.post("/sequelize/addproduct", jwtAuth, addProduct);
 protectedRoute.get("/sequalize/display_product", jwtAuth, display_product);
+protectedRoute.delete("/deleteAll", jwtAuth, delete_product);
+protectedRoute.delete("/delete:id/product/:id", jwtAuth, delete_productById);
 export default protectedRoute;

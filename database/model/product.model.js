@@ -4,9 +4,8 @@ import { DataTypes } from "sequelize";
 const product_model = seqalize.define(
   "product_sql",
   {
-    _id: {
+    id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
