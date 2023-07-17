@@ -1,7 +1,7 @@
 import { connection } from "../database/sql/sql.js";
 
 export const display_actors = async (req, res, next) => {
-  const query = "SELECT  * from actor";
+  const query = "SELECT  * from `actor`";
   const dbconnect = await connection;
   await dbconnect
     .execute(query)

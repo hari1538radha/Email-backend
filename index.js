@@ -6,7 +6,9 @@ import protectedRoute from "./Routes/user_auth.js";
 import userRoute from "./Routes/user_router.js";
 import { MongoUrl } from "./database/mongo_db.config.js";
 import mongoose from "mongoose";
-
+import seqalize from "./database/sql/sql.js";
+import { Sequelize } from "sequelize";
+import product_model from "./database/model/product.model.js";
 const app = express();
 //middleware for server
 app.use(cors());
@@ -26,12 +28,29 @@ mongoose
     useUnifiedtopology: true,
   })
   .then(() => {
+    seqalize
+      .authenticate()
+      .then((response) => {
+        seqalize
+          .sync()
+          .then((result) => {
+            console.log("tabels are been created");
+            app.listen(port, () => {
+              console.log(`Example app listening on port ${port}!`);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        console.log("Seqalize ORM connected ");
+      })
+      .catch((err) => {
+        console.log({ message: "seqalize error", error: err });
+      });
     console.log("MongoDB connected");
- 
+    //initializing the sequalize sync method
     //server starting
-    app.listen(port, () => {
-      console.log(`Example app listening on port ${port}!`);
-    });
   })
   .catch((err) => {
     if (err) {
