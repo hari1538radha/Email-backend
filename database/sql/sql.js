@@ -1,4 +1,4 @@
-import sql from "mysql2";
+import sql from "mysql2/promise";
 import { configDotenv } from "dotenv";
 configDotenv();
 export const connection = sql.createConnection({
@@ -7,10 +7,8 @@ export const connection = sql.createConnection({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
 });
-connection.connect((err) => {
-  if (err) {
-    console.log(error);
-  } else {
-    console.log({ message: "SQL connected" });
-  }
+connection.then((response) => {
+  console.log("SQL connected");
+}).catch((err) => {
+  console.log({ message: "error", error: err });
 });

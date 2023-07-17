@@ -9,6 +9,7 @@ import { deleteAllProducts } from "../Controllers/delete_product.controller.js";
 import { updateProductPurchased } from "../Controllers/product_purchase.controller.js";
 import { userUpdateCallback } from "../Controllers/product_purchase.controller.js";
 import { display_actors } from "../Controllers/displayactor_sql_contoller.js";
+import { display_actorbyName } from "../Controllers/displayactor_sql_contoller.js";
 const protectedRoute = express.Router();
 
 protectedRoute.get("/addproducts", jwtAuth, display);
@@ -23,5 +24,6 @@ protectedRoute.put(
   updateProductPurchased,
   userUpdateCallback
 );
+protectedRoute.get("/actor_byname", jwtAuth, display_actorbyName);
 protectedRoute.get("/actor_diplay", jwtAuth, display_actors);
 export default protectedRoute;
