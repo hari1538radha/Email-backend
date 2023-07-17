@@ -12,12 +12,12 @@ export const Login = async (req, res) => {
     console.log(isValidUser);
     //password validation
     valid = await bcrypt.compare(userPassword, isValidUser.userPassword);
-    console.log(await valid);
+    console.log(valid);
 
     if (!isValidUser) {
       return res.status(422).send({ message: "Invalid username or password" });
     } else {
-      if (!(await valid)) {
+      if (!(valid)) {
         res.status(401).send({ message: "Invalid password" });
       } else {
         res.status(200).send({

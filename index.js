@@ -15,10 +15,11 @@ app.use(bodyParser.json());
 app.use(express.json());
 //ENV
 const port = process.env.PORT;
-app.use("/api", mainRoute)
-app.use("/user",userRoute)
+app.use("/api", mainRoute);
+app.use("/user", userRoute);
 app.use("/auth", protectedRoute);
 //Mongoose connection
+
 mongoose
   .connect(MongoUrl, {
     useNewUrlParser: true,
@@ -26,6 +27,7 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected");
+ 
     //server starting
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}!`);
