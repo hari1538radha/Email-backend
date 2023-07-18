@@ -19,7 +19,7 @@ const user_model = seqalize.define(
         // is: [
         //   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
         // ],
-        isEmail: {           
+        isEmail: {
           message: "enter the valid email",
         },
       },
@@ -29,11 +29,19 @@ const user_model = seqalize.define(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isAlphanumeric: {
+          message: "the password should be in alpha numeric",
+        },
+      },
     },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
       allowNull: false,
+      validate: {
+        isNull: true,
+      },
     },
   },
   { freezeTableName: true, timestamps: true }

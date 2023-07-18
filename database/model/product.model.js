@@ -20,6 +20,9 @@ const product_model = seqalize.define(
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 100,
+      },
     },
   },
   { timestamps: true, createdAt: true, updatedAt: true }
