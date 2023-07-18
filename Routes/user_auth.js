@@ -14,6 +14,7 @@ import { addProduct } from "../Controllers/addproducts_sql.controller.js";
 import { display_product } from "../Controllers/addproducts_sql.controller.js";
 import { delete_product } from "../Controllers/addproducts_sql.controller.js";
 import { delete_productById } from "../Controllers/addproducts_sql.controller.js";
+import { updatebyID } from "../Controllers/addproducts_sql.controller.js";
 const protectedRoute = express.Router();
 
 protectedRoute.get("/addproducts", jwtAuth, display);
@@ -34,4 +35,5 @@ protectedRoute.post("/sequelize/addproduct", jwtAuth, addProduct);
 protectedRoute.get("/sequalize/display_product", jwtAuth, display_product);
 protectedRoute.delete("/deleteAll", jwtAuth, delete_product);
 protectedRoute.delete("/delete:id/product/:id", jwtAuth, delete_productById);
+protectedRoute.put("/sequalize/update:id/id",jwtAuth,updatebyID)
 export default protectedRoute;

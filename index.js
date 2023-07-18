@@ -21,41 +21,41 @@ app.use("/api", mainRoute);
 app.use("/user", userRoute);
 app.use("/auth", protectedRoute);
 //Mongoose connection
-
-mongoose
-  .connect(MongoUrl, {
-    useNewUrlParser: true,
-    useUnifiedtopology: true,
-  })
-  .then(() => {
+seqalize
+  .authenticate()
+  .then((response) => {
     seqalize
-      .authenticate()
-      .then((response) => {
-        seqalize
-          .sync({ force: true })
-          .then((result) => {
-            console.log("tabels are been created");
-            app.listen(port, () => {
-              console.log(`Example app listening on port ${port}!`);
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        console.log("Seqalize ORM connected ");
+      .sync()
+      .then((result) => {
+        console.log("tabels are been created");
+        app.listen(port, () => {
+          console.log(`Example app listening on port ${port}!`);
+        });
       })
       .catch((err) => {
-        console.log({ message: "seqalize error", error: err });
+        console.log(err);
       });
-    console.log("MongoDB connected");
-    //initializing the sequalize sync method
-    //server starting
+
+    console.log("Seqalize ORM connected ");
   })
   .catch((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("mongodb connected");
-    }
+    console.log({ message: "seqalize error", error: err });
   });
+// mongoose
+//   .connect(MongoUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedtopology: true,
+//   })
+//   .then(() => {
+
+//     console.log("MongoDB connected");
+//     //initializing the sequalize sync method
+//     //server starting
+//   })
+//   .catch((err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("mongodb connected");
+//     }
+// });
