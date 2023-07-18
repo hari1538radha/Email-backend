@@ -12,6 +12,7 @@ export const userOTPMessaging = async (req, res) => {
   const client = Twilio(accountSid, authToken);
 
   const { user_id, contact_Number } = req.query;
+  //otp generation
   const generateOTP = () => {
     const digits = "0123456789";
     let OTP = "";
@@ -51,7 +52,4 @@ export const userOTPMessaging = async (req, res) => {
     };
     otpmessaging();
   } catch (error) {}
-  //env configuration
-
-  //otp generation
 };

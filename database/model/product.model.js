@@ -21,7 +21,8 @@ const product_model = seqalize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-  },  // { timestamps: true, createdAt: true, updatedAt: true }
+  },
+  { timestamps: true, createdAt: true, updatedAt: true }
 );
 
 export default product_model;
