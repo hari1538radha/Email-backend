@@ -16,6 +16,7 @@ import { display_product } from "../Controllers/addproducts_sql.controller.js";
 import { delete_product } from "../Controllers/addproducts_sql.controller.js";
 import { delete_productById } from "../Controllers/addproducts_sql.controller.js";
 import { updatebyID } from "../Controllers/addproducts_sql.controller.js";
+import order_model  from "../database/model/Order.model.js";
 //creating a router middleeware
 const protectedRoute = express.Router();
 
@@ -34,8 +35,9 @@ protectedRoute.put(
 protectedRoute.get("/sql/actor_byname", jwtAuth, display_actorbyName);
 protectedRoute.get("/sql/actor_diplay", jwtAuth, display_actors);
 protectedRoute.post("/sequelize/addproduct", jwtAuth, addProduct);
-protectedRoute.post("/sequalize/display_product", jwtAuth,display_product);
+protectedRoute.post("/sequalize/display_product", jwtAuth, display_product);
 protectedRoute.delete("/deleteAll", jwtAuth, delete_product);
 protectedRoute.delete("/delete:id/product/:id", jwtAuth, delete_productById);
 protectedRoute.put("/sequalize/update:id/id", jwtAuth, updatebyID);
+protectedRoute.post("/order/sql", jwtAuth, order_model);
 export default protectedRoute;

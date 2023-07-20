@@ -1,0 +1,1 @@
+import product_model from "../database/model/product.model";

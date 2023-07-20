@@ -8,6 +8,7 @@ const product_model = seqalize.define(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+  
     },
     title: {
       type: DataTypes.STRING,
